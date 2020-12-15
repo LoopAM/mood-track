@@ -1,0 +1,44 @@
+{
+  "name": "mood-track",
+  "version": "1.0.0",
+  "description": "An app that analyzes a user's most recent Spotify plays and recommends a track based off the mood of those tracks.",
+  "main": "server.js",
+  "engines": {
+    "node": "12.20.0"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "startserver": "nodemon --exec babel-node server/index.js",
+    "startclient": "webpack serve --config ./webpack.config.js --mode development",
+    "watch": "webpack --watch"
+  },
+  "author": "Andrew Loop <andrewmloop@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "querystring": "^0.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/node": "^7.12.6",
+    "@babel/preset-env": "^7.12.7",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.0.1",
+    "html-webpack-plugin": "^4.5.0",
+    "nodemon": "^2.0.6",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.10.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  }
+}

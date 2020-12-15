@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Mood Track</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <div id="root">
+
+    <header>
+      <h1>Mood Track</h1>
+    </header>
+
+    <div id="page-container">
+      <div id="description">
+        <p>Search for 3 songs to be analyzed.</p>
+      </div>
+
+      <a id="login-link" href="/login">Sign In to Spotify</a>
+
+      <div class="divider">
+        <hr />
+        <p>Or</p>
+        <hr />
+      </div>
+
+      <form action="" id="search-form">
+        <input
+          type="search"
+          name="search-track-1"
+          placeholder="Search songs"
+          id="search-track-1"
+          class="search-box">
+        <input
+          type="search"
+          name="search-track-2"
+          placeholder="Search songs"
+          id="search-track-2"
+          class="search-box">
+        <input
+          type="search"
+          name="search-track-3"
+          placeholder="Search songs"
+          id="search-track-3"
+          class="search-box">
+        <input
+          type="submit"
+          value="Search"
+          id="search-btn"
+          class="btn">
+      </form>
+    </div>
+
+    <footer>
+
+    </footer>
+  </div>
+
+<script src="bundle.js"></script></body>
+</html>
