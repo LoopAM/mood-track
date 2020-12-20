@@ -1,12 +1,15 @@
 import 'dotenv/config.js';
 import express from 'express';
 import cors from 'cors';
-import path, { dirname } from 'path';
+import { dirname } from 'path';
 import bodyParser from 'body-parser';
 import querystring from 'querystring';
 import axios from 'axios';
-import { getUser, getRecentTracks } from './logic';
 import { fileURLToPath } from 'url';
+import handlebars from 'express-handlebars';
+
+import Login from './login.js';
+import { getUser, getMoodTrack } from './logic.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -15,32 +18,29 @@ const client = process.env.CLIENT_ID;
 const secret = process.env.SECRET;
 const redirectURI = process.env.REDIRECT_URI;
 
-const scopes = [
-  'user-read-recently-played',
-  'user-read-private',
-  'user-library-modify'
-]
-
+// Set up middleware
 const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(path.resolve(__dirname, './client/dist')));
+app.use(express.static(__dirname + '/public'));
+
+// Set up templateing engine
+app.set('view engine', 'hbs');
+app.set('views', __dirname + '/views');
+app.engine('hbs', handlebars({
+  layoutsDir: __dirname + '/views/layouts',
+  extname: 'hbs'
+}));
+
+
 
 app.get('/', (req, res) => {
-  res.sendFile('index.html');
+  //res.sendFile('index.html');
+  res.render('home',{layout: 'index'});
 });
 
-app.get('/login', (req, res) => {
-  // Get auth code from Spotify's authorize endpoint
-  res.redirect('https://accounts.spotify.com/authorize?' +
-    querystring.stringify({
-      response_type: 'code',
-      client_id: client,
-      scope: scopes.join(' '),
-      redirect_uri: redirectURI
-    }));
-});
+app.get('/login', Login);
 
 app.get('/callback', (req, res) => {
   if (req.query.error) { res.send('error') }
@@ -58,20 +58,31 @@ app.get('/callback', (req, res) => {
     console.log(err);
   })
   .then( result => {
-    console.log(result.data);
-
     const accessToken = result.data.access_token;
     const tokenType = result.data.token_type;
     const refreshToken = result.data.refresh_token;
 
     Promise.all([
       getUser(accessToken),
-      getRecentTracks(accessToken)
+      getMoodTrack(accessToken)
     ])
     .catch( err => console.log(err))
     .then( results => {
-      console.log(results);
-      res.send(results);
+      const displayName = results[0].display_name;
+      const recentTracks = results[1].recentTracks;
+      const moodTrack = results[1].moodTrack;
+      console.log('display name', displayName);
+      console.log('moodtrack', moodTrack.tracks[0]);
+      console.log('album cover', moodTrack.tracks[0].album.images);
+      console.log('recent tracks', recentTracks[0].track);
+      res.render('mood', {
+        layout: 'index',
+        display_name: displayName,
+        mood: 'Pumped Up',
+        mood_desc: 'keep that pump going',
+        mood_track: moodTrack.tracks[0],
+        recent_tracks: recentTracks
+      });
     });
   });
 });

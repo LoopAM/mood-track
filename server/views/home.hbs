@@ -1,0 +1,68 @@
+<div id="home-page">
+
+  <div class="header container">
+    <h1 class="title text">Mood Track</h1>
+  </div>
+
+  <div class="instructions container">
+    <p class="text">Log in to Spotify to get your Mood Track from your most recent listens. Alternatively, search for three songs that best represent your mood to get your Mood Track.</p>
+  </div>
+
+  <div class="container">
+    <a
+      href="/login"
+      id="log-in-link"
+      class="btn log-in text">Log in to Spotify</a>
+  </div>
+
+  <div class="divider container">
+    <hr />
+    <p class="text or">Or</p>
+    <hr />
+  </div>
+
+  <div id="input-div" class="container">
+    <form action="/search" method="POST">
+      <div class="input container">
+        <input
+          type="search"
+          name="song_search_1"
+          id="search-input-1"
+          class="search"
+          placeholder="Search for a song"
+          required="true"
+          >
+      </div>
+      <div class="input container">
+        <input
+          type="search"
+          name="song_search_2"
+          id="search-input-2"
+          class="search"
+          placeholder="Search for a song"
+          required="true"
+          >
+      </div>
+      <div class="input container">
+        <input
+          type="search"
+          name="song_search_3"
+          id="search-input-3"
+          class="search"
+          placeholder="Search for a song"
+          required="true">
+      </div>
+      <div class="input container">
+        <input
+          id="submit-btn"
+          class="submit btn"
+          type="submit"
+          value="Get your Mood Track">
+      </div>
+    </form>
+  </div>
+
+  <div class="footer container">
+    <p class="text">Footer text</p>
+  </div>
+</div>

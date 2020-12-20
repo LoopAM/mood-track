@@ -1,0 +1,77 @@
+<div id="mood-page">
+
+  <div class="header container">
+    <h1 class="title text">Mood Track</h1>
+  </div>
+
+  <div class="text-container">
+    {{#if display_name}}
+      <p class="greeting text">Hello, {{display_name}}</p>
+    {{else}}
+      <p class="greeting text">Hello</p>
+    {{/if}}
+  </div>
+
+  <div class="text-container">
+    <p class="size-30 text">Seems like you're feeling <span class="accent">{{mood}}.</span> Here's a track to <span class="accent">{{mood_desc}}.</span></p>
+  </div>
+
+  <div class="vert-divider">
+    <p class="size-20 text">Your Mood Track</p>
+    <hr class="vert-hr" />
+  </div>
+
+  <div class="track-container">
+    {{#if mood_track}}
+      <div class="album-container">
+        <img
+          src="{{mood_track.album.images.2.url}}"
+          alt="Album cover"
+          class="album"
+          width="100px"
+          height="100px">
+      </div>
+      <div class="track-info-container">
+        <p class="track-name text">{{mood_track.name}}</p>
+        <p class="track-artist text">{{mood_track.artists.0.name}}</p>
+        <p class="track-album-name text">{{mood_track.album.name}}</p>
+      </div>
+    {{else}}
+      <p class="text">No track available</p>
+    {{/if}}
+  </div>
+
+  <div class="btn-container">
+    <button class="btn-half text">Preview</button>
+    <button class="btn-half text">Add to library</button>
+  </div>
+
+  <div class="vert-divider">
+    <p class="size-20 text">Your Recent Tracks</p>
+    <hr class="vert-hr" />
+  </div>
+
+  <div class="recent-tracks-container">
+    {{#each recent_tracks}}
+      <div class="track-container">
+        <div class="album-container">
+          <img
+            src="{{this.track.album.images.2.url}}"
+            alt="Album cover"
+            class="album"
+            width="100px"
+            height="100px">
+        </div>
+        <div class="track-info-container">
+          <p class="track-name text">{{this.track.name}}</p>
+          <p class="track-artist text">{{this.track.artists.0.name}}</p>
+          <p class="track-album-name text">{{this.track.album.name}}</p>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+
+  <div class="footer container">
+    <p class="text">Footer text</p>
+  </div>
+</div>

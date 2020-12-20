@@ -2,14 +2,14 @@
   "name": "mood-track",
   "version": "1.0.0",
   "description": "An app that analyzes a user's most recent Spotify plays and recommends a track based off the mood of those tracks.",
-  "main": "server.js",
+  "main": "./server/server.js",
   "engines": {
     "node": "12.20.0"
   },
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "startserver": "nodemon --exec babel-node server/index.js",
+    "start": "node ./server/server.js",
+    "startserver": "nodemon --exec babel-node server/server.js",
     "startclient": "webpack serve --config ./webpack.config.js --mode development",
     "watch": "webpack --watch"
   },
@@ -21,11 +21,13 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-handlebars": "^5.2.0",
     "querystring": "^0.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/node": "^7.12.6",
+    "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/preset-env": "^7.12.7",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.0.1",

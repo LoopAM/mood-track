@@ -1,64 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Mood Track</title>
-  <meta name="description" content="">
+  <meta name="description" content="Mood Track recommends a song based on the user's most recent Spotify plays.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
   <div id="root">
+    <div id="home-page">
+      <header>
+        <h1>Mood Track</h1>
+      </header>
 
-    <header>
-      <h1>Mood Track</h1>
-    </header>
+      <div id="home-container">
+        <div id="description">
+          <p>Search for 3 songs to be analyzed.</p>
+        </div>
 
-    <div id="page-container">
-      <div id="description">
-        <p>Search for 3 songs to be analyzed.</p>
+        <a id="login-link" href="/login">Sign In to Spotify</a>
+        <button id="login-btn">Log in To Spotify</button>
+
+        <div class="divider">
+          <hr />
+          <p>Or</p>
+          <hr />
+        </div>
+
+        <form action="" id="search-form">
+          <input
+            type="search"
+            name="search-track-1"
+            placeholder="Search songs"
+            id="search-track-1"
+            class="search-box">
+          <input
+            type="search"
+            name="search-track-2"
+            placeholder="Search songs"
+            id="search-track-2"
+            class="search-box">
+          <input
+            type="search"
+            name="search-track-3"
+            placeholder="Search songs"
+            id="search-track-3"
+            class="search-box">
+          <input
+            type="submit"
+            value="Search"
+            id="search-btn"
+            class="btn">
+        </form>
       </div>
 
-      <a id="login-link" href="/login">Sign In to Spotify</a>
+      <footer>
 
-      <div class="divider">
-        <hr />
-        <p>Or</p>
-        <hr />
-      </div>
-
-      <form action="" id="search-form">
-        <input
-          type="search"
-          name="search-track-1"
-          placeholder="Search songs"
-          id="search-track-1"
-          class="search-box">
-        <input
-          type="search"
-          name="search-track-2"
-          placeholder="Search songs"
-          id="search-track-2"
-          class="search-box">
-        <input
-          type="search"
-          name="search-track-3"
-          placeholder="Search songs"
-          id="search-track-3"
-          class="search-box">
-        <input
-          type="submit"
-          value="Search"
-          id="search-btn"
-          class="btn">
-      </form>
+      </footer>
     </div>
 
-    <footer>
+    <div id="mood-page">
 
-    </footer>
+    </div>
   </div>
 
 <script src="bundle.js"></script></body>
