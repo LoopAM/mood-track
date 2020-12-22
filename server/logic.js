@@ -133,10 +133,10 @@ async function getMoodTrack(token) {
   };
 
   const moodTrack = await getSimilarTrack(token, averageFeatures, recentTracks);
-  console.log(recentTracks);
+  /* console.log(recentTracks);
   console.log(averageFeatures);
   console.log(moodTrack.tracks[0].name);
-  console.log(moodTrack.tracks[0].artists);
+  console.log(moodTrack.tracks[0].artists); */
   return {recentTracks, moodTrack}
 }
 

@@ -18,6 +18,8 @@ const client = process.env.CLIENT_ID;
 const secret = process.env.SECRET;
 const redirectURI = process.env.REDIRECT_URI;
 
+let accessToken = '';
+
 // Set up middleware
 const app = express();
 app.use(cors());
@@ -33,15 +35,17 @@ app.engine('hbs', handlebars({
   extname: 'hbs'
 }));
 
-
-
+// HOME PAGE
 app.get('/', (req, res) => {
   //res.sendFile('index.html');
   res.render('home',{layout: 'index'});
 });
 
+// End point when user clicks login button
 app.get('/login', Login);
 
+// End point for redirect from Spotify authentication
+// from /login end point
 app.get('/callback', (req, res) => {
   if (req.query.error) { res.send('error') }
 
@@ -58,7 +62,7 @@ app.get('/callback', (req, res) => {
     console.log(err);
   })
   .then( result => {
-    const accessToken = result.data.access_token;
+    accessToken = result.data.access_token;
     const tokenType = result.data.token_type;
     const refreshToken = result.data.refresh_token;
 
@@ -71,19 +75,50 @@ app.get('/callback', (req, res) => {
       const displayName = results[0].display_name;
       const recentTracks = results[1].recentTracks;
       const moodTrack = results[1].moodTrack;
-      console.log('display name', displayName);
+      /* console.log('display name', displayName);
       console.log('moodtrack', moodTrack.tracks[0]);
       console.log('album cover', moodTrack.tracks[0].album.images);
-      console.log('recent tracks', recentTracks[0].track);
+      console.log('recent tracks', recentTracks[0].track); */
       res.render('mood', {
         layout: 'index',
         display_name: displayName,
         mood: 'Pumped Up',
         mood_desc: 'keep that pump going',
         mood_track: moodTrack.tracks[0],
-        recent_tracks: recentTracks
+        recent_tracks: recentTracks,
+        script: './public/index.js'
       });
     });
+  });
+});
+
+// End point for when user clicks add to library
+// on their mood track
+app.post('/add', async (req, res) => {
+  // Song id from req params
+  console.log(req.body);
+  const id = req.body.songId;
+  console.log(id);
+
+  await axios({
+    method: 'put',
+    url: 'https://api.spotify.com/v1/me/tracks',
+    headers: {
+      Authorization: 'Bearer ' + accessToken,
+      'Content-Type': 'application/json'
+    },
+    data: {
+      ids: [id]
+    }
+  })
+  .catch( error => {
+    console.log(error)
+    res.sendStatus(400);
+  })
+  .then( response => {
+    if (response.status === 200) {
+      res.sendStatus(200);
+    }
   });
 });
 
