@@ -4,22 +4,22 @@
     <h1 class="title text">Mood Track</h1>
   </div>
 
-  <div class="text-container">
-    {{#if display_name}}
+  {{#if display_name}}
+    <div class=" fade-in text-container">
       <p class="greeting text">Hello, {{display_name}}</p>
-    {{/if}}
-  </div>
+    </div>
+  {{/if}}
 
-  <div class="text-container">
+  <div class="fade-in text-container">
     <p class="size-30 text">Seems like you're feeling <span class="accent">{{mood}}.</span> Here's a track to <span class="accent">{{mood_desc}}.</span></p>
   </div>
 
-  <div class="vert-divider">
+  <div class="fade-in vert-divider">
     <p class="size-20 text">Your Mood Track</p>
     <hr class="vert-hr" />
   </div>
 
-  <div class="track-container">
+  <div class="fade-in track-container">
     {{#if mood_track}}
       <div class="album-container">
         <img
@@ -27,7 +27,8 @@
           alt="Album cover"
           class="album"
           width="100px"
-          height="100px">
+          height="100px"
+          loading="lazy">
       </div>
       <div class="track-info-container">
         <p class="track-name text">{{mood_track.name}}</p>
@@ -39,7 +40,7 @@
     {{/if}}
   </div>
 
-  <div class="btn-container">
+  <div class="fade-in btn-container">
     {{#if mood_track.preview_url}}
       <a
         id="preview-song-link"
@@ -47,41 +48,72 @@
         class="a-half text"
         target="_blank"
         rel="noreferrer"
-      >
-      Preview in new tab</a>
+      >Preview in new tab
+      </a>
     {{else}}
-      <a class="disabled btn-half text">No preview</a>
+      <a class="disabled a-half text">No preview</a>
     {{/if}}
-    <button
-      type="button"
-      id="add-song-button"
-      data-songid="{{mood_track.id}}"
-      class="btn-half text">Add to library</button>
+    {{#if display_name}}
+      <button
+        type="button"
+        id="add-song-btn"
+        data-songid="{{mood_track.id}}"
+        class="btn-half text"
+      >Add to library
+      </button>
+    {{/if}}
   </div>
 
-  <div class="vert-divider">
-    <p class="size-20 text">Your Recent Tracks</p>
+  <div class="fade-in vert-divider">
+    {{#if recent_tracks}}
+      <p class="size-20 text">Your Recent Tracks</p>
+    {{else}}
+      <p class="size-20 text">Your Search Tracks</p>
+    {{/if}}
     <hr class="vert-hr" />
   </div>
 
-  <div class="recent-tracks-container">
-    {{#each recent_tracks}}
-      <div class="track-container">
-        <div class="album-container">
-          <img
-            src="{{this.track.album.images.2.url}}"
-            alt="Album cover"
-            class="album"
-            width="100px"
-            height="100px">
+  <div class="fade-in recent-tracks-container">
+    {{#if recent_tracks}}
+      {{#each recent_tracks}}
+        <div class="track-container">
+          <div class="album-container">
+            <img
+              src="{{this.track.album.images.2.url}}"
+              alt="Album cover"
+              class="album"
+              width="100px"
+              height="100px"
+              loading="lazy">
+          </div>
+          <div class="track-info-container">
+            <p class="track-name text">{{this.track.name}}</p>
+            <p class="track-artist text">{{this.track.artists.0.name}}</p>
+            <p class="track-album-name text">{{this.track.album.name}}</p>
+          </div>
         </div>
-        <div class="track-info-container">
-          <p class="track-name text">{{this.track.name}}</p>
-          <p class="track-artist text">{{this.track.artists.0.name}}</p>
-          <p class="track-album-name text">{{this.track.album.name}}</p>
+      {{/each}}
+    {{/if}}
+    {{#if search_tracks}}
+      {{#each search_tracks}}
+        <div class="track-container">
+          <div class="album-container">
+            <img
+              src="{{this.album.images.2.url}}"
+              alt="Album cover"
+              class="album"
+              width="100px"
+              height="100px"
+              loading="lazy">
+          </div>
+          <div class="track-info-container">
+            <p class="track-name text">{{this.name}}</p>
+            <p class="track-artist text">{{this.artists.0.name}}</p>
+            <p class="track-album-name text">{{this.album.name}}</p>
+          </div>
         </div>
-      </div>
-    {{/each}}
+      {{/each}}
+    {{/if}}
   </div>
 
   <div class="footer container">
@@ -89,38 +121,4 @@
   </div>
 </div>
 
-<script>
-  async function addSong(e) {
-    console.log('Clicked to add song');
-    // Get target element
-    const target = e.target;
-    console.log(target);
-
-    // Get song id in data attribute
-    const songId = target.dataset.songid;
-    console.log(songId);
-
-    // Make fetch post request to server to add song
-    await fetch('/add', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({songId: songId})
-    })
-    .catch( error => console.log(error) )
-    .then( response => {
-      console.log(response);
-      if (response.status === 200) {
-        console.log('Song added!');
-        target.textContent = 'Added!';
-      } else {
-        console.log('Failure to add');
-        target.textContent = 'Failed to add';
-      }
-    });
-  }
-
-  const addSongBtn = document.getElementById('add-song-button');
-  addSongBtn.addEventListener('click', addSong);
-</script>
+<script type="module" src="./js/mood.js"></script>

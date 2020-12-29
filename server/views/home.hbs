@@ -4,25 +4,25 @@
     <h1 class="title text">Mood Track</h1>
   </div>
 
-  <div class="instructions container">
+  <div class="fade-in instructions container">
     <p class="text">Log in to Spotify to get your Mood Track from your most recent listens. Alternatively, search for three songs that best represent your mood to get your Mood Track.</p>
   </div>
 
-  <div class="container">
+  <div class="fade-in container">
     <a
       href="/login"
       id="log-in-link"
       class="btn log-in text">Log in to Spotify</a>
   </div>
 
-  <div class="divider container">
+  <div class="fade-in divider container">
     <hr />
     <p class="text or">Or</p>
     <hr />
   </div>
 
-  <div id="input-div" class="container">
-    <form action="/search" method="POST">
+  <div id="input-div" class="fade-in container">
+    <form action="/submit" method="POST">
       <div class="input container">
         <input
           type="search"
@@ -32,7 +32,13 @@
           placeholder="Search for a song"
           required="true"
           >
+        <input
+          type="text"
+          name="song_id_1"
+          id="song_id_1"
+          hidden="true">
       </div>
+      <div id="search-result-1" class="search-result"></div>
       <div class="input container">
         <input
           type="search"
@@ -42,7 +48,13 @@
           placeholder="Search for a song"
           required="true"
           >
+        <input
+          type="text"
+          name="song_id_2"
+          id="song_id_2"
+          hidden="true">
       </div>
+      <div id="search-result-2" class="search-result"></div>
       <div class="input container">
         <input
           type="search"
@@ -51,7 +63,13 @@
           class="search"
           placeholder="Search for a song"
           required="true">
+        <input
+          type="text"
+          name="song_id_3"
+          id="song_id_3"
+          hidden="true">
       </div>
+      <div id="search-result-3" class="search-result"></div>
       <div class="input container">
         <input
           id="submit-btn"
@@ -66,3 +84,5 @@
     <p class="text">Footer text</p>
   </div>
 </div>
+
+<script type="module" src="./js/home.js"></script>

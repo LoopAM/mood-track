@@ -10,6 +10,8 @@ const scopes = [
   'user-library-modify'
 ]
 
+// Redirects request to Spotify's authorization endpoint
+// On user login in, redirects back to /callback endpoint
 function Login(req, res) {
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({

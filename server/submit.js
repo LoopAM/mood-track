@@ -1,32 +1,20 @@
 import axios from 'axios';
 
-// Get the user's information from callback redirect
-// after the user logs into their Spotify account
-async function getUser(token) {
+// Get track data from the songIds passed into req
+async function getSearchTracks(token, trackIds) {
   return await axios({
     method: 'get',
-    url: 'https://api.spotify.com/v1/me',
+    url: 'https://api.spotify.com/v1/tracks',
     headers: {
-      'Authorization': 'Bearer ' + token
+      Authorization: 'Bearer ' + token
+    },
+    params: {
+      ids: trackIds.join(',')
     }
   })
-  .catch( err => console.log(err) )
-  .then( result => result.data );
-}
-
-// Get the user's most recent tracks after the redirect
-// to the callback url once the user has logged in to Spotify
-async function getRecentTracks(token) {
-  return await axios({
-    method: 'get',
-    url: 'https://api.spotify.com/v1/me/player/recently-played?limit=5',
-    headers: {
-      'Authorization': 'Bearer ' + token
-    }
-  })
-  .catch( err => console.log(err) )
-  .then( result => {
-    return result.data.items
+  .catch( error => console.log(error) )
+  .then( response => {
+    return response.data.tracks;
   });
 }
 
@@ -36,7 +24,7 @@ async function getFeatures(token, tracks) {
 
   // Push track ids from tracks paramter into array
   await tracks.forEach( track => {
-    trackIds.push(track.track.id);
+    trackIds.push(track.id);
   });
 
   return await axios({
@@ -63,7 +51,7 @@ async function getSimilarTrack(token, features, tracks) {
 
   // Push track ids from tracks paramter into array
   await tracks.forEach( track => {
-    trackIds.push(track.track.id);
+    trackIds.push(track.id);
   });
 
   return await axios({
@@ -99,9 +87,9 @@ async function getSimilarTrack(token, features, tracks) {
 
 // Analyze the tracks' audio features and fetch a track that matches
 // the averages of the features collected
-async function getMoodTrack(token) {
-  const recentTracks = await getRecentTracks(token);
-  const trackFeatures = await getFeatures(token, recentTracks);
+async function getMoodTrackFromSearch(token, trackIds) {
+  const searchTracks = await getSearchTracks(token, trackIds);
+  const trackFeatures = await getFeatures(token, searchTracks);
 
   const loudness = (trackFeatures.reduce( (prev, cur) => {
     return prev + cur.loudness;
@@ -131,12 +119,10 @@ async function getMoodTrack(token) {
     speechiness
   };
 
-  const moodTrack = await getSimilarTrack(token, averageFeatures, recentTracks);
-  /* console.log(recentTracks);
-  console.log(averageFeatures);
+  const moodTrack = await getSimilarTrack(token, averageFeatures, searchTracks);
   console.log(moodTrack.tracks[0].name);
-  console.log(moodTrack.tracks[0].artists); */
-  return {recentTracks, moodTrack}
+  console.log(moodTrack.tracks[0].artists);
+  return {searchTracks, moodTrack};
 }
 
-export { getUser, getMoodTrack }
+export { getMoodTrackFromSearch }

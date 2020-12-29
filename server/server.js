@@ -1,5 +1,5 @@
 import 'dotenv/config.js';
-import express from 'express';
+import express, { response } from 'express';
 import cors from 'cors';
 import { dirname } from 'path';
 import bodyParser from 'body-parser';
@@ -10,6 +10,8 @@ import handlebars from 'express-handlebars';
 
 import Login from './login.js';
 import { getUser, getMoodTrack } from './logic.js';
+import { getSearchToken } from './token.js';
+import { getMoodTrackFromSearch } from './submit.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -27,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
-// Set up templateing engine
+// Set up templating engine
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
 app.engine('hbs', handlebars({
@@ -38,7 +40,7 @@ app.engine('hbs', handlebars({
 // HOME PAGE
 app.get('/', (req, res) => {
   //res.sendFile('index.html');
-  res.render('home',{layout: 'index'});
+  res.render('home', {layout: 'index'});
 });
 
 // End point when user clicks login button
@@ -85,8 +87,7 @@ app.get('/callback', (req, res) => {
         mood: 'Pumped Up',
         mood_desc: 'keep that pump going',
         mood_track: moodTrack.tracks[0],
-        recent_tracks: recentTracks,
-        script: './public/index.js'
+        recent_tracks: recentTracks
       });
     });
   });
@@ -119,6 +120,65 @@ app.post('/add', async (req, res) => {
     if (response.status === 200) {
       res.sendStatus(200);
     }
+  });
+});
+
+// Middleware for /search and /submit endpoints to verify
+// search token and fetch a new one if necessary
+app.use('/search', getSearchToken)
+
+
+// Fetch songs from Spotify search api
+app.post('/search', async (req, res) => {
+  const songTitle = req.body.songTitle;
+
+  await axios({
+    method: 'get',
+    url: 'https://api.spotify.com/v1/search',
+    headers: {
+      Authorization: `Bearer ${req.searchToken}`
+    },
+    params: {
+      q: songTitle,
+      type: 'track',
+      limit: 5,
+
+    }
+  })
+  .catch( error => {
+    console.log(error);
+  })
+  .then( response => {
+    res.json(response.data.tracks.items);
+  })
+});
+
+app.use('/submit', getSearchToken)
+
+// Get mood track similar to the login api endpoint
+// Uses search tracks as seeds for mood track
+app.post('/submit', async (req, res) => {
+  const id1 = req.body.song_id_1;
+  const id2 = req.body.song_id_2;
+  const id3 = req.body.song_id_3;
+  const songIds = [id1, id2, id3];
+  const searchToken = req.searchToken;
+
+  Promise.all([
+    getMoodTrackFromSearch(searchToken, songIds)
+  ])
+  .catch( error => console.log(error) )
+  .then( result => {
+    const searchTracks = result[0].searchTracks;
+    const moodTrack = result[0].moodTrack;
+    console.log(searchTracks);
+    res.render('mood', {
+      layout: 'index',
+      mood: 'Pumped Up',
+      mood_desc: 'keep that pump going',
+      mood_track: moodTrack.tracks[0],
+      search_tracks: searchTracks
+    });
   });
 });
 
