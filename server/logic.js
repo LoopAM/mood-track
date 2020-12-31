@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { analyzeMood } from './mood.js';
 
 // Get the user's information from callback redirect
 // after the user logs into their Spotify account
@@ -131,12 +132,10 @@ async function getMoodTrack(token) {
     speechiness
   };
 
+  const moodAnalysis = analyzeMood(averageFeatures);
+
   const moodTrack = await getSimilarTrack(token, averageFeatures, recentTracks);
-  /* console.log(recentTracks);
-  console.log(averageFeatures);
-  console.log(moodTrack.tracks[0].name);
-  console.log(moodTrack.tracks[0].artists); */
-  return {recentTracks, moodTrack}
+  return {recentTracks, moodTrack, moodAnalysis}
 }
 
 export { getUser, getMoodTrack }

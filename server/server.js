@@ -1,5 +1,5 @@
 import 'dotenv/config.js';
-import express, { response } from 'express';
+import express from 'express';
 import cors from 'cors';
 import { dirname } from 'path';
 import bodyParser from 'body-parser';
@@ -77,6 +77,7 @@ app.get('/callback', (req, res) => {
       const displayName = results[0].display_name;
       const recentTracks = results[1].recentTracks;
       const moodTrack = results[1].moodTrack;
+      const moodAnalysis = results[1].moodAnalysis;
       /* console.log('display name', displayName);
       console.log('moodtrack', moodTrack.tracks[0]);
       console.log('album cover', moodTrack.tracks[0].album.images);
@@ -84,8 +85,8 @@ app.get('/callback', (req, res) => {
       res.render('mood', {
         layout: 'index',
         display_name: displayName,
-        mood: 'Pumped Up',
-        mood_desc: 'keep that pump going',
+        mood: moodAnalysis.mood,
+        mood_desc: moodAnalysis.mood_desc,
         mood_track: moodTrack.tracks[0],
         recent_tracks: recentTracks
       });
@@ -171,11 +172,13 @@ app.post('/submit', async (req, res) => {
   .then( result => {
     const searchTracks = result[0].searchTracks;
     const moodTrack = result[0].moodTrack;
+    const moodAnalysis = result[0].moodAnalysis;
+
     console.log(searchTracks);
     res.render('mood', {
       layout: 'index',
-      mood: 'Pumped Up',
-      mood_desc: 'keep that pump going',
+      mood: moodAnalysis.mood,
+      mood_desc: moodAnalysis.mood_desc,
       mood_track: moodTrack.tracks[0],
       search_tracks: searchTracks
     });

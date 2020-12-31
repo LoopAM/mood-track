@@ -95,7 +95,3 @@ search2.addEventListener('input', handleSearch);
 
 const search3 = document.getElementById('search-input-3');
 search3.addEventListener('input', handleSearch);
-
-// Event listener for submit button
-const submitBtn = document.getElementById('submit-btn');
-submitBtn.addEventListener('click', handleSubmit);

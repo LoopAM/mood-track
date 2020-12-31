@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { analyzeMood } from './mood.js';
 
 // Get track data from the songIds passed into req
 async function getSearchTracks(token, trackIds) {
@@ -119,10 +120,12 @@ async function getMoodTrackFromSearch(token, trackIds) {
     speechiness
   };
 
+  const moodAnalysis = analyzeMood(averageFeatures);
+
   const moodTrack = await getSimilarTrack(token, averageFeatures, searchTracks);
   console.log(moodTrack.tracks[0].name);
   console.log(moodTrack.tracks[0].artists);
-  return {searchTracks, moodTrack};
+  return {searchTracks, moodTrack, moodAnalysis};
 }
 
 export { getMoodTrackFromSearch }
