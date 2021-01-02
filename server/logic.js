@@ -52,7 +52,6 @@ async function getFeatures(token, tracks) {
   })
   .catch( error => console.log(error) )
   .then( response => {
-    //console.log(response.data.audio_features);
     return response.data.audio_features;
   });
 }

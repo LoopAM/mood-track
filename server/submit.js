@@ -40,7 +40,6 @@ async function getFeatures(token, tracks) {
   })
   .catch( error => console.log(error) )
   .then( response => {
-    //console.log(response.data.audio_features);
     return response.data.audio_features;
   });
 }
@@ -123,8 +122,6 @@ async function getMoodTrackFromSearch(token, trackIds) {
   const moodAnalysis = analyzeMood(averageFeatures);
 
   const moodTrack = await getSimilarTrack(token, averageFeatures, searchTracks);
-  console.log(moodTrack.tracks[0].name);
-  console.log(moodTrack.tracks[0].artists);
   return {searchTracks, moodTrack, moodAnalysis};
 }
 

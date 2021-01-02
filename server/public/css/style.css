@@ -211,7 +211,7 @@ form {
   line-height: 2rem;
 
   background-color: white;
-  border: 3px solid rgba(95, 14, 145, 1);
+  border: 3px solid #5f0e91;
   border-radius: 2rem;
 
   box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.5);
@@ -228,6 +228,7 @@ form {
   text-decoration: none;
   text-align: center;
   padding: 1.25rem;
+  -webkit-appearance: none;
 }
 
 .size-30 {

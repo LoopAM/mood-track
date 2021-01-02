@@ -98,9 +98,7 @@ app.get('/callback', (req, res) => {
 // on their mood track
 app.post('/add', async (req, res) => {
   // Song id from req params
-  console.log(req.body);
   const id = req.body.songId;
-  console.log(id);
 
   await axios({
     method: 'put',
@@ -174,7 +172,6 @@ app.post('/submit', async (req, res) => {
     const moodTrack = result[0].moodTrack;
     const moodAnalysis = result[0].moodAnalysis;
 
-    console.log(searchTracks);
     res.render('mood', {
       layout: 'index',
       mood: moodAnalysis.mood,

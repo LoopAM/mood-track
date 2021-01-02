@@ -75,8 +75,6 @@ function appendSearch(element, data) {
 
       prevInput.value = targetTitle;
       prevHiddenInput.value = targetId;
-      console.log(prevHiddenInput.value);
-      console.log(prevInput.value);
 
       // Clear div when a song is selected
       parent.textContent = '';

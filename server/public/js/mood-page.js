@@ -1,5 +1,4 @@
 async function addSong(e) {
-  console.log('Clicked to add song');
   // Get target element
   const target = e.target;
 
