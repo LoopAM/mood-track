@@ -4,121 +4,124 @@
     <h1 class="title text">Mood Track</h1>
   </div>
 
-  {{#if display_name}}
-    <div class=" fade-in text-container">
-      <p class="greeting text">Hello, {{display_name}}</p>
-    </div>
-  {{/if}}
-
-  <div class="fade-in text-container">
-    <p class="size-30 text">Seems like you're <span class="accent">{{mood}}.</span> Here's a track to <span class="accent">{{mood_desc}}</span>.</p>
-  </div>
-
-  <div class="fade-in vert-divider">
-    <p class="size-20 text">Your Mood Track</p>
-    <hr class="vert-hr" />
-  </div>
-
-  <div class="fade-in track-container">
-    {{#if mood_track}}
-      <div class="album-container">
-        <img
-          src="{{mood_track.album.images.2.url}}"
-          alt="Album cover"
-          class="album"
-          width="100px"
-          height="100px"
-          loading="lazy">
-      </div>
-      <div class="track-info-container">
-        <p class="track-name text">{{mood_track.name}}</p>
-        <p class="track-artist text">{{mood_track.artists.0.name}}</p>
-        <p class="track-album-name text">{{mood_track.album.name}}</p>
-      </div>
-    {{else}}
-      <p class="text">No track available</p>
-    {{/if}}
-  </div>
-
-  <div class="fade-in btn-container">
-    {{#if mood_track.preview_url}}
-      <a
-        id="preview-song-link"
-        href="{{mood_track.preview_url}}"
-        class="a-half text"
-        target="_blank"
-        rel="noreferrer"
-      >Preview in new tab
-      </a>
-    {{else}}
-      <a class="disabled a-half text">No preview</a>
-    {{/if}}
+  <div class="content-container">
     {{#if display_name}}
-      <button
-        type="button"
-        id="add-song-btn"
-        data-songid="{{mood_track.id}}"
-        class="btn-half text"
-      >Add to library
-      </button>
+      <div class=" fade-in text-container">
+        <p class="greeting text">Hello, {{display_name}}</p>
+      </div>
     {{/if}}
-  </div>
 
-  <div class="fade-in vert-divider">
-    {{#if recent_tracks}}
-      <p class="size-20 text">Your Recent Tracks</p>
-    {{else}}
-      <p class="size-20 text">Your Search Tracks</p>
-    {{/if}}
-    <hr class="vert-hr" />
-  </div>
+    <div class="fade-in text-container">
+      <p class="size-30 text">Seems like you're <span class="accent">{{mood}}.</span> Here's a track to <span class="accent">{{mood_desc}}</span>.</p>
+    </div>
 
-  <div class="fade-in recent-tracks-container">
-    {{#if recent_tracks}}
-      {{#each recent_tracks}}
-        <div class="track-container">
-          <div class="album-container">
-            <img
-              src="{{this.track.album.images.2.url}}"
-              alt="Album cover"
-              class="album"
-              width="100px"
-              height="100px"
-              loading="lazy">
-          </div>
-          <div class="track-info-container">
-            <p class="track-name text">{{this.track.name}}</p>
-            <p class="track-artist text">{{this.track.artists.0.name}}</p>
-            <p class="track-album-name text">{{this.track.album.name}}</p>
-          </div>
+    <div class="fade-in vert-divider">
+      <p class="size-20 text">Your Mood Track</p>
+      <hr class="vert-hr" />
+    </div>
+
+    <div class="fade-in track-container">
+      {{#if mood_track}}
+        <div class="album-container">
+          <img
+            src="{{mood_track.album.images.1.url}}"
+            alt="Album cover"
+            class="album"
+            width="100px"
+            height="100px"
+            loading="lazy">
         </div>
-      {{/each}}
-    {{/if}}
-    {{#if search_tracks}}
-      {{#each search_tracks}}
-        <div class="track-container">
-          <div class="album-container">
-            <img
-              src="{{this.album.images.2.url}}"
-              alt="Album cover"
-              class="album"
-              width="100px"
-              height="100px"
-              loading="lazy">
-          </div>
-          <div class="track-info-container">
-            <p class="track-name text">{{this.name}}</p>
-            <p class="track-artist text">{{this.artists.0.name}}</p>
-            <p class="track-album-name text">{{this.album.name}}</p>
-          </div>
+        <div class="track-info-container">
+          <p class="track-name text">{{mood_track.name}}</p>
+          <p class="track-artist text">{{mood_track.artists.0.name}}</p>
+          <p class="track-album-name text">{{mood_track.album.name}}</p>
         </div>
-      {{/each}}
-    {{/if}}
+      {{else}}
+        <p class="text">No track available</p>
+      {{/if}}
+    </div>
+
+    <div class="fade-in btn-container">
+      {{#if mood_track.preview_url}}
+        <a
+          id="preview-song-link"
+          href="{{mood_track.preview_url}}"
+          class="a-half text"
+          target="_blank"
+          rel="noreferrer"
+        >Preview in new tab
+        </a>
+      {{else}}
+        <a class="disabled a-half text">No preview</a>
+      {{/if}}
+      {{#if display_name}}
+        <button
+          type="button"
+          id="add-song-btn"
+          data-songid="{{mood_track.id}}"
+          class="btn-half text"
+        >Add to library
+        </button>
+      {{/if}}
+    </div>
+
+    <div class="fade-in vert-divider">
+      {{#if recent_tracks}}
+        <p class="size-20 text">Your Recent Tracks</p>
+      {{else}}
+        <p class="size-20 text">Your Search Tracks</p>
+      {{/if}}
+      <hr class="vert-hr" />
+    </div>
+
+    <div class="fade-in recent-tracks-container">
+      {{#if recent_tracks}}
+        {{#each recent_tracks}}
+          <div class="track-container">
+            <div class="album-container">
+              <img
+                src="{{this.track.album.images.1.url}}"
+                alt="Album cover"
+                class="album"
+                width="100px"
+                height="100px"
+                loading="lazy">
+            </div>
+            <div class="track-info-container">
+              <p class="track-name text">{{this.track.name}}</p>
+              <p class="track-artist text">{{this.track.artists.0.name}}</p>
+              <p class="track-album-name text">{{this.track.album.name}}</p>
+            </div>
+          </div>
+        {{/each}}
+      {{/if}}
+      {{#if search_tracks}}
+        {{#each search_tracks}}
+          <div class="track-container">
+            <div class="album-container">
+              <img
+                src="{{this.album.images.1.url}}"
+                alt="Album cover"
+                class="album"
+                width="100px"
+                height="100px"
+                loading="lazy">
+            </div>
+            <div class="track-info-container">
+              <p class="track-name text">{{this.name}}</p>
+              <p class="track-artist text">{{this.artists.0.name}}</p>
+              <p class="track-album-name text">{{this.album.name}}</p>
+            </div>
+          </div>
+        {{/each}}
+      {{/if}}
+    </div>
   </div>
 
   <div class="footer container">
     <p class="text">Footer text</p>
   </div>
+
 </div>
 
 <script type="module" src="./js/mood-page.js"></script>
