@@ -1,10 +1,14 @@
-async function handleSearch(e) {
+function handleSearch(e) {
   const target = e.target;
   const targetDiv = target.parentNode.nextElementSibling;
   const value = target.value;
 
+  if (value === '' || value === undefined) {
+    return;
+  }
+
   // Make fetch request for search query when value changes
-  await fetch('/search', {
+  fetch('/search', {
     method: 'post',
     headers: {
       'Content-Type': 'application/json'
@@ -12,7 +16,7 @@ async function handleSearch(e) {
     body: JSON.stringify({songTitle: value})
   })
   .catch( error => {
-    console.log(error)
+    console.log(error);
   })
   .then( response => response.json() )
   .then( data => {
@@ -84,12 +88,28 @@ function appendSearch(element, data) {
   });
 }
 
+function debounce(callback, delay) {
+  let interval;
+  return (...args) => {
+    clearTimeout(interval);
+    interval = setTimeout( () => callback(...args), delay);
+  };
+}
+
+const searchDebounce = debounce(handleSearch, 250);
+
 // Event listeners for search inputs
 const search1 = document.getElementById('search-input-1');
-search1.addEventListener('input', handleSearch);
+search1.addEventListener('input', (e) => {
+  searchDebounce(e);
+});
 
 const search2 = document.getElementById('search-input-2');
-search2.addEventListener('input', handleSearch);
+search2.addEventListener('input', (e) => {
+  searchDebounce(e);
+});
 
 const search3 = document.getElementById('search-input-3');
-search3.addEventListener('input', handleSearch);
+search3.addEventListener('input', (e) => {
+  searchDebounce(e);
+});

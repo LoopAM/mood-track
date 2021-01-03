@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url';
 import handlebars from 'express-handlebars';
 import cluster from 'cluster';
 import os from 'os';
+import compression from 'compression';
 
 import Login from './login.js';
 import { getUser, getMoodTrack } from './logic.js';
@@ -42,6 +43,7 @@ if (cluster.isMaster) {
   app.use(cors());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
+  app.use(compression());
   app.use(express.static(__dirname + '/public'));
 
   // Set up templating engine
@@ -155,12 +157,12 @@ if (cluster.isMaster) {
       params: {
         q: songTitle,
         type: 'track',
-        limit: 5,
-
+        limit: 3,
       }
     })
     .catch( error => {
       console.log(error);
+      res.sendStatus(404);
     })
     .then( response => {
       res.json(response.data.tracks.items);
