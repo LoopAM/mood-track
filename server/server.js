@@ -23,7 +23,7 @@ const client = process.env.CLIENT_ID;
 const secret = process.env.SECRET;
 const redirectURI = process.env.REDIRECT_URI;
 
-let accessToken = '';
+
 
 if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
@@ -37,6 +37,7 @@ if (cluster.isMaster) {
     console.log(`Worker ${worker.process.pid} died`);
   });
 } else {
+  let accessToken = '';
 
   // Set up middleware
   const app = express();
