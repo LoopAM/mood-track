@@ -10,6 +10,7 @@ import handlebars from 'express-handlebars';
 import cluster from 'cluster';
 import os from 'os';
 import compression from 'compression';
+import cookieParser from 'cookie-parser';
 
 import Login from './login.js';
 import { getUser, getMoodTrack } from './logic.js';
@@ -37,13 +38,13 @@ if (cluster.isMaster) {
     console.log(`Worker ${worker.process.pid} died`);
   });
 } else {
-  let accessToken = '';
 
   // Set up middleware
   const app = express();
   app.use(cors());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
+  app.use(cookieParser());
   app.use(compression());
   app.use(express.static(__dirname + '/public'));
 
@@ -82,7 +83,7 @@ if (cluster.isMaster) {
       console.log(err);
     })
     .then( result => {
-      accessToken = result.data.access_token;
+      const accessToken = result.data.access_token;
       const tokenType = result.data.token_type;
       const refreshToken = result.data.refresh_token;
 
@@ -96,11 +97,12 @@ if (cluster.isMaster) {
         const recentTracks = results[1].recentTracks;
         const moodTrack = results[1].moodTrack;
         const moodAnalysis = results[1].moodAnalysis;
-        /* console.log('display name', displayName);
-        console.log('moodtrack', moodTrack.tracks[0]);
-        console.log('album cover', moodTrack.tracks[0].album.images);
-        console.log('recent tracks', recentTracks[0].track); */
-        res.render('mood', {
+
+        res.cookie('moodToken', accessToken, {
+          maxAge: 1000 * 60 * 60,
+          httpOnly: true
+        })
+        .render('mood', {
           layout: 'index',
           display_name: displayName,
           mood: moodAnalysis.mood,
@@ -117,12 +119,13 @@ if (cluster.isMaster) {
   app.post('/add', async (req, res) => {
     // Song id from req params
     const id = req.body.songId;
+    const token = req.cookies['moodToken'];
 
     await axios({
       method: 'put',
       url: 'https://api.spotify.com/v1/me/tracks',
       headers: {
-        Authorization: 'Bearer ' + accessToken,
+        Authorization: 'Bearer ' + token,
         'Content-Type': 'application/json'
       },
       data: {

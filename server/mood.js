@@ -25,12 +25,12 @@ function analyzeMood(features) {
     else {
       // Between angry and depressed
       return {
-        mood: 'Feeling down',
-        mood_desc: 'Keep you down, but not out'
+        mood: 'Feeling a bit blue',
+        mood_desc: 'Feel the blues a bit more'
       }
     }
   }
-  else if (valence >- 0.67) {
+  else if (valence >= 0.67) {
     if (energy <= 0.33) {
       // Relaxed
       return {
