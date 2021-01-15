@@ -160,6 +160,10 @@ body {
   border-radius: 2.5rem;
 }
 
+.btn:hover {
+  transform: scale(1.05);
+}
+
 .log-in {
   font-style: normal;
   font-weight: 700;
@@ -332,6 +336,11 @@ form {
   font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
+}
+
+.a-half:hover,
+.btn-half:hover {
+  transform: scale(1.05);
 }
 
 .recent-tracks-container {
