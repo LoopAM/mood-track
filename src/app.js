@@ -17,13 +17,14 @@ import { getUser, getMoodTrack } from './logic.js';
 import { getSearchToken } from './token.js';
 import { getMoodTrackFromSearch } from './submit.js';
 
+// Hack to make __dirname work with ES Modules
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+// ENV variables
 const port = process.env.PORT || 5500;
 const client = process.env.CLIENT_ID;
 const secret = process.env.SECRET;
 const redirectURI = process.env.REDIRECT_URI;
-
 
 
 if (cluster.isMaster) {
@@ -58,7 +59,6 @@ if (cluster.isMaster) {
 
   // HOME PAGE
   app.get('/', (req, res) => {
-    //res.sendFile('index.html');
     res.render('home', {layout: 'index'});
   });
 

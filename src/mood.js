@@ -2,9 +2,7 @@
 // and then returns a mood and a description based on the
 // features
 function analyzeMood(features) {
-  const loudness = features.loudness;
   const energy = features.energy;
-  const tempo = features.tempo;
   const valence = features.valence;
 
   if (valence <= 0.33) {
@@ -48,15 +46,27 @@ function analyzeMood(features) {
     else {
       // Content
       return {
-        mood: 'Feeling good',
+        mood: 'Feeling real good',
         mood_desc: 'Keep that seratonin coming'
       }
     }
   }
   else {
-    return {
-      mood: 'Just feeling',
-      mood_desc: 'Feel some more'
+    if (energy <= 0.33) {
+      return {
+        mood: 'Bored',
+        mood_desc: 'Stare at the wall'
+      }
+    } else if (energy >= 0.66) {
+      return {
+        mood: 'Anxious',
+        mood_desc: 'Ride out that anxiety'
+      }
+    } else {
+      return {
+        mood: 'In tune with the world',
+        mood_desc: 'Feel more in tune'
+      }
     }
   }
 }

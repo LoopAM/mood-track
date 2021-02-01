@@ -3,14 +3,14 @@
   "version": "2.0.0",
   "private": true,
   "description": "An app that analyzes a user's most recent Spotify plays and recommends a track based off the mood of those tracks.",
-  "main": "./app/server.js",
+  "main": "./src/app.js",
   "engines": {
     "node": "12.20.0"
   },
   "type": "module",
   "scripts": {
-    "start": "node ./app/server.js",
-    "devstart": "nodemon --exec babel-node app/server.js"
+    "start": "node ./src/app.js",
+    "devstart": "nodemon --exec babel-node src/app.js"
   },
   "author": "Andrew Loop <andrewmloop@gmail.com>",
   "license": "MIT",

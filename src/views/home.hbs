@@ -1,0 +1,139 @@
+<div id="home-page">
+
+  <div class="header container">
+    <a class="logo-link" href='/'>
+      <h1 class="title text">Mood Track</h1>
+    </a>
+  </div>
+
+  <div class="content-container">
+    <div class="fade-in instructions container">
+      <p class="text">Log in to Spotify to get your Mood Track from your most recent listens. Or, select a mood from the selection below.</p>
+    </div>
+
+    <div class="fade-in container">
+      <a
+        href="/login"
+        id="log-in-link"
+        class="btn log-in text">Log in to Spotify</a>
+    </div>
+
+    <div class="fade-in divider container">
+      <hr />
+      <p class="text or">Or</p>
+      <hr />
+    </div>
+
+    <div class="mood-buttons-container fade-in">
+
+      <div class="mood-button-div">
+        <button
+          class="mood-btn"
+          id="mad-btn"
+          type="button"
+          style="background-color: #10002B;"
+          onclick="handleMoodClick"
+          data-mood="mad">Mad At The World</button>
+      </div>
+
+      <div class="mood-button-div">
+        <button
+          class="mood-btn"
+          id="anxious-btn"
+          type="button"
+          style="background-color: #180034;"
+          onclick="handleMoodClick"
+          data-mood="anxious">Anxious</button>
+      </div>
+
+      <div class="mood-button-div">
+        <button
+          class="mood-btn"
+          id="pumped-btn"
+          type="button"
+          style="background-color: #20003D;"
+          onclick="handleMoodClick"
+          data-mood="feels">In The Feels</button>
+      </div>
+
+      <div class="mood-button-div">
+        <button
+          class="mood-btn"
+          id="blue-btn"
+          type="button"
+          style="background-color: #34085E;"
+          onclick="handleMoodClick"
+          data-mood="blue">A Bit Blue</button>
+      </div>
+
+      <div class="mood-button-div">
+        <button
+          class="mood-btn"
+          id="content-btn"
+          type="button"
+          style="background-color: #52168D;"
+          onclick="handleMoodClick"
+          data-mood="bored">Bored</button>
+      </div>
+
+      <div class="mood-button-div">
+        <button
+          class="mood-btn"
+          id="good-btn"
+          type="button"
+          style="background-color: #752AB7;"
+          onclick="handleMoodClick"
+          data-mood="content">Content</button>
+      </div>
+
+      <div class="mood-button-div">
+        <button
+          class="mood-btn"
+          id="feels-btn"
+          type="button"
+          style="background-color: #9643DB;"
+          onclick="handleMoodClick"
+          data-mood="vibe">Just Vibin'</button>
+      </div>
+
+      <div class="mood-button-div">
+        <button
+          class="mood-btn"
+          id="bored-btn"
+          type="button"
+          style="background-color: #AC5AED;"
+          onclick="handleMoodClick"
+          data-mood="good">Feelin' Good</button>
+      </div>
+
+      <div class="mood-button-div">
+        <button
+          class="mood-btn"
+          id="vibe-btn"
+          type="button"
+          style="background-color: #C170FF;"
+          onclick="handleMoodClick"
+          data-mood="pumped">Pumped Up</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer container">
+    <p class="text-small">Made with love by AML</p>
+    <a
+      href="https://github.com/LoopAM/mood-track"
+      target="_blank"
+      rel="noreferrer"
+      >
+      <img
+        src="./assets/GitHub-Mark-64px.png"
+        alt="The Github Logo"
+        width="30px"
+        height="30px"
+        class="github-logo">
+    </a>
+  </div>
+
+</div>
+
+<script type="module" src="./js/home-page.js"></script>
