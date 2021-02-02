@@ -12,10 +12,11 @@ import os from 'os';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 
-import Login from './login.js';
-import { getUser, getMoodTrack } from './logic.js';
-import { getSearchToken } from './token.js';
+import Login from './components/login.js';
+import { getUser, getMoodTrack } from './components/logic.js';
+import { getSearchToken } from './components/token.js';
 import { getMoodTrackFromSearch } from './submit.js';
+import { getPredefinedMoodTracks } from './components/button.js';
 
 // Hack to make __dirname work with ES Modules
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -84,8 +85,6 @@ if (cluster.isMaster) {
     })
     .then( result => {
       const accessToken = result.data.access_token;
-      const tokenType = result.data.token_type;
-      const refreshToken = result.data.refresh_token;
 
       Promise.all([
         getUser(accessToken),
@@ -102,7 +101,7 @@ if (cluster.isMaster) {
           maxAge: 1000 * 60 * 60,
           httpOnly: true
         })
-        .render('mood', {
+        .render('login-mood', {
           layout: 'index',
           display_name: displayName,
           mood: moodAnalysis.mood,
@@ -141,6 +140,22 @@ if (cluster.isMaster) {
         res.sendStatus(200);
       }
     });
+  });
+
+  app.use('/mood', getSearchToken);
+  app.post('/mood', async (req, res) => {
+    const mood = req.body.mood;
+    const genre = req.body.genre;
+    const searchToken = req.searchToken;
+
+    const songs = await getPredefinedMoodTracks(searchToken, mood, genre);
+
+    // res.render('button-mood', {
+    //   layout: 'index',
+    //   mood: mood,
+    //   genre: genre,
+    //   tracks: songs.tracks,
+    // });
   });
 
   // Middleware for /search and /submit endpoints to verify
@@ -193,13 +208,15 @@ if (cluster.isMaster) {
       const moodTrack = result[0].moodTrack;
       const moodAnalysis = result[0].moodAnalysis;
 
-      res.render('mood', {
-        layout: 'index',
-        mood: moodAnalysis.mood,
-        mood_desc: moodAnalysis.mood_desc,
-        mood_track: moodTrack.tracks[0],
-        search_tracks: searchTracks
-      });
+      res.redirect('/');
+
+      // .render('mood', {
+      //   layout: 'index',
+      //   mood: moodAnalysis.mood,
+      //   mood_desc: moodAnalysis.mood_desc,
+      //   mood_track: moodTrack.tracks[0],
+      //   search_tracks: searchTracks
+      // });
     });
   });
 

@@ -8,7 +8,7 @@
 
   <div class="content-container">
     <div class="fade-in instructions container">
-      <p class="text">Log in to Spotify to get your Mood Track from your most recent listens. Or, select a mood from the selection below.</p>
+      <p class="text">Log in to Spotify to get your personal Mood Track from your most recent listens. Or, select a genre and mood from the selection below to get 5 tracks with a similar mood.</p>
     </div>
 
     <div class="fade-in container">
@@ -24,98 +24,133 @@
       <hr />
     </div>
 
-    <div class="mood-buttons-container fade-in">
-
-      <div class="mood-button-div">
-        <button
-          class="mood-btn"
-          id="mad-btn"
-          type="button"
-          style="background-color: #10002B;"
-          onclick="handleMoodClick"
-          data-mood="mad">Mad At The World</button>
+    <form action="/mood" method="post">
+      <div class="genre-select-container fade-in">
+        <select id="genre-select" class="select-css" name="genre">
+          <option value="acoustic">Acoustic</option>
+          <option value="alt-rock">Alt-Rock</option>
+          <option value="alternative">Alternative</option>
+          <option value="bluegrass">Bluegrass</option>
+          <option value="blues">Blues</option>
+          <option value="classical">Classical</option>
+          <option value="country">Country</option>
+          <option value="dance">Dance</option>
+          <option value="disco">Disco</option>
+          <option value="hard-rock">Hard-Rock</option>
+          <option value="hip-hop">Hip-Hop</option>
+          <option value="indie">Indie</option>
+          <option value="jazz">Jazz</option>
+          <option value="k-pop">K-Pop</option>
+          <option value="metal">Metal</option>
+          <option value="pop">Pop</option>
+          <option value="punk-rock">Punk-Rock</option>
+          <option value="r-n-b">R&amp;B</option>
+          <option value="rock">Rock</option>
+        </select>
       </div>
 
-      <div class="mood-button-div">
-        <button
-          class="mood-btn"
-          id="anxious-btn"
-          type="button"
-          style="background-color: #180034;"
-          onclick="handleMoodClick"
-          data-mood="anxious">Anxious</button>
-      </div>
+      <div class="mood-buttons-container fade-in">
 
-      <div class="mood-button-div">
-        <button
-          class="mood-btn"
-          id="pumped-btn"
-          type="button"
-          style="background-color: #20003D;"
-          onclick="handleMoodClick"
-          data-mood="feels">In The Feels</button>
-      </div>
+        <div class="mood-button-div">
+          <button
+            class="mood-btn"
+            id="mad-btn"
+            name="mood"
+            value="mad"
+            type="submit"
+            style="background-color: #10002B;">
+            Mad At The World</button>
+        </div>
 
-      <div class="mood-button-div">
-        <button
-          class="mood-btn"
-          id="blue-btn"
-          type="button"
-          style="background-color: #34085E;"
-          onclick="handleMoodClick"
-          data-mood="blue">A Bit Blue</button>
-      </div>
+        <div class="mood-button-div">
+          <button
+            class="mood-btn"
+            id="anxious-btn"
+            name="mood"
+            value="anxious"
+            type="submit"
+            style="background-color: #180034;">
+            Anxious</button>
+        </div>
 
-      <div class="mood-button-div">
-        <button
-          class="mood-btn"
-          id="content-btn"
-          type="button"
-          style="background-color: #52168D;"
-          onclick="handleMoodClick"
-          data-mood="bored">Bored</button>
-      </div>
+        <div class="mood-button-div">
+          <button
+            class="mood-btn"
+            id="pumped-btn"
+            name="mood"
+            value="feels"
+            type="submit"
+            style="background-color: #20003D;">
+            In The Feels</button>
+        </div>
 
-      <div class="mood-button-div">
-        <button
-          class="mood-btn"
-          id="good-btn"
-          type="button"
-          style="background-color: #752AB7;"
-          onclick="handleMoodClick"
-          data-mood="content">Content</button>
-      </div>
+        <div class="mood-button-div">
+          <button
+            class="mood-btn"
+            id="blue-btn"
+            name="mood"
+            value="blue"
+            type="submit"
+            style="background-color: #34085E;">
+            A Bit Blue</button>
+        </div>
 
-      <div class="mood-button-div">
-        <button
-          class="mood-btn"
-          id="feels-btn"
-          type="button"
-          style="background-color: #9643DB;"
-          onclick="handleMoodClick"
-          data-mood="vibe">Just Vibin'</button>
-      </div>
+        <div class="mood-button-div">
+          <button
+            class="mood-btn"
+            id="content-btn"
+            name="mood"
+            value="bored"
+            type="submit"
+            style="background-color: #52168D;">
+            Bored</button>
+        </div>
 
-      <div class="mood-button-div">
-        <button
-          class="mood-btn"
-          id="bored-btn"
-          type="button"
-          style="background-color: #AC5AED;"
-          onclick="handleMoodClick"
-          data-mood="good">Feelin' Good</button>
-      </div>
+        <div class="mood-button-div">
+          <button
+            class="mood-btn"
+            id="good-btn"
+            name="mood"
+            value="content"
+            type="submit"
+            style="background-color: #752AB7;">
+            Content</button>
+        </div>
 
-      <div class="mood-button-div">
-        <button
-          class="mood-btn"
-          id="vibe-btn"
-          type="button"
-          style="background-color: #C170FF;"
-          onclick="handleMoodClick"
-          data-mood="pumped">Pumped Up</button>
+        <div class="mood-button-div">
+          <button
+            class="mood-btn"
+            id="feels-btn"
+            name="mood"
+            value="vibe"
+            type="submit"
+            style="background-color: #9643DB;">
+            Just Vibin'</button>
+        </div>
+
+        <div class="mood-button-div">
+          <button
+            class="mood-btn"
+            id="bored-btn"
+            name="mood"
+            value="good"
+            type="submit"
+            style="background-color: #AC5AED;">
+            Feelin' Good</button>
+        </div>
+
+        <div class="mood-button-div">
+          <button
+            class="mood-btn"
+            id="vibe-btn"
+            name="mood"
+            value="pumped"
+            type="submit"
+            style="background-color: #C170FF;">
+            Pumped Up</button>
+        </div>
       </div>
-    </div>
+    </form>
   </div>
 
   <div class="footer container">

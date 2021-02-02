@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { analyzeMood } from './mood.js';
+import { analyzeMood } from './components/mood.js';
 
 // Get track data from the songIds passed into req
 async function getSearchTracks(token, trackIds) {

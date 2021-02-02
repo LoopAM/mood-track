@@ -19,5 +19,6 @@ export default function Login(req, res) {
       client_id: client,
       scope: scopes.join(' '),
       redirect_uri: redirectURI
-    }));
+    })
+  );
 }
