@@ -9,7 +9,7 @@
   <div class="content-container">
 
     <div class="fade-in text-container">
-      <p class="size-30 text">Seems like you're <span class="accent">{{mood_title}}.</span> Here's a track to <span class="accent">{{mood_text}}</span> with a <span class="accent">{{genre}}</span> twist.</p>
+      <p class="size-30 text">So, you're <span class="accent">{{mood_title}}.</span> Here's a track to <span class="accent">{{mood_text}}</span> with a <span class="accent">{{genre}}</span> twist.</p>
     </div>
 
     <div class="fade-in vert-divider">
@@ -42,13 +42,13 @@
             <a
               id="preview-song-link"
               href="{{this.preview_url}}"
-              class="a-half text"
+              class="a-full text"
               target="_blank"
               rel="noreferrer"
             >Preview in new tab
             </a>
           {{else}}
-            <a class="disabled a-half text">No preview</a>
+            <a class="disabled a-full text">No preview</a>
           {{/if}}
         </div>
       {{/each}}
