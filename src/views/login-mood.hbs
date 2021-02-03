@@ -1,18 +1,20 @@
-<div id="mood-page">
+<div id="login-mood-page">
 
   <div class="header container">
-    <h1 class="title text">Mood Track</h1>
+    <a class="logo-link" href='/'>
+      <h1 class="title text">Mood Track</h1>
+    </a>
   </div>
 
   <div class="content-container">
     {{#if display_name}}
       <div class=" fade-in text-container">
-        <p class="greeting text">Hello, {{display_name}}</p>
+        <p class="greeting text">Hey there, {{display_name}}</p>
       </div>
     {{/if}}
 
     <div class="fade-in text-container">
-      <p class="size-30 text">Seems like you're <span class="accent">{{mood}}.</span> Here's a track to <span class="accent">{{mood_desc}}</span>.</p>
+      <p class="size-30 text">Seems like you're <span class="accent">{{mood}}.</span> Here's some tracks to <span class="accent">{{mood_desc}}</span>.</p>
     </div>
 
     <div class="fade-in vert-divider">
@@ -20,7 +22,7 @@
       <hr class="vert-hr" />
     </div>
 
-    <div class="fade-in track-container">
+    <div id="mood-track-container" class="fade-in">
       {{#if mood_track}}
         <div class="album-container">
           <img

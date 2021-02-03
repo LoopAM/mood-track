@@ -1,0 +1,671 @@
+/* ------ CSS RESET ----- */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* ----------------------
+------ INDEX CSS --------
+---------------------- */
+* {
+  box-sizing: border-box;
+  --theme-color: #3F1F70;
+  --acc-font: 'Fira Sans', sans-serif;
+  --reg-font: 'Montserrat', sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: var(--reg-font);
+  width: 100%;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75 )), url(../assets/records-small.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.logo-link {
+  text-decoration: none;
+  transition: 0.4s;
+}
+
+.logo-link:hover {
+  text-shadow: 4px 4px black;
+}
+
+#home-page,
+#login-mood-page,
+#button-mood-page {
+  position: relative;
+  min-height: 100vh;
+}
+
+.content-container {
+  width: 100%;
+  padding: 0 0 7rem;
+}
+
+.text {
+  color: white;
+  font-style: normal;
+  font-size: 2rem;
+  line-height: 2.5rem;
+}
+
+.text-small {
+  color: #ffffff;
+  font-size: 1.5rem;
+  line-height: 2.5rem;
+
+  padding-left: 2rem;
+}
+
+.container {
+  width: 100%;
+  margin: 1rem 0 0;
+  padding: 0 2rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  position: relative;
+  height: 5rem;
+  left: 0;
+  top: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0;
+
+  background-color: var(--theme-color);
+}
+
+.title {
+  font-family: var(--acc-font);
+  font-style: normal;
+  font-weight: bolder;
+  font-size: 4rem;
+}
+
+.text-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+
+  text-align: left;
+
+  padding: 2rem;
+}
+
+.greeting {
+  font-family: var(--acc-font);
+  font-style: normal;
+  font-weight: bolder;
+  font-size: 4rem;
+  margin-top: 2rem;
+}
+
+.instructions {
+  text-align: center;
+  padding: 1rem 2rem;
+}
+
+.btn {
+  width: 100%;
+  height: 5rem;
+
+  background-color: var(--theme-color);
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 1rem;
+
+  transition: 0.4s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.log-in {
+  font-style: normal;
+  text-align: center;
+  text-decoration: none;
+  padding: 1.25rem 0;
+}
+
+.divider {
+  flex-direction: row;
+  padding: 1rem 0;
+  margin: 2rem 0;
+}
+
+hr {
+  height: 2px;
+  width: 30%;
+  margin: 0 1.5rem;
+  background-color: white;
+}
+
+.or {
+  font-weight: bold;
+}
+
+/* -------------------------------
+------- SELECT GENRE CSS --------
+------------------------------- */
+.genre-select-container {
+  width: 70%;
+  margin: 0 auto 4rem;
+}
+
+.select-css {
+	display: block;
+	font-size: 2rem;
+	font-family: var(--reg-font);
+	color: white;
+	line-height: 1.3;
+	padding: .6em 1.4em .5em .8em;
+	width: 100%;
+	max-width: 100%; /* useful when width is set to anything other than 100% */
+	margin: 0;
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.5);
+  border: solid 1px var(--theme-color);
+	border-radius: 1rem;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: var(--theme-color);
+	/* note: bg image below uses 2 urls. The first is an svg data uri for the arrow icon, and the second is the gradient.
+		for the icon, if you want to change the color, be sure to use `%23` instead of `#`, since it's a url. You can also swap in a different svg icon or an external image reference
+
+	*/
+	background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+	  linear-gradient(to bottom, var(--theme-color) 0%,var(--theme-color) 100%);
+	background-repeat: no-repeat, repeat;
+	/* arrow icon position (1em from the right, 50% vertical) , then gradient position*/
+	background-position: right .7em top 50%, 0 0;
+	/* icon size, then gradient */
+  background-size: .65em auto, 100%;
+
+  transition: 0.4s;
+}
+/* Hide arrow icon in IE browsers */
+.select-css::-ms-expand {
+	display: none;
+}
+/* Hover style */
+.select-css:hover {
+	border-color:white;
+}
+/* Focus style */
+.select-css:focus {
+	border-color: white;
+	/* It'd be nice to use -webkit-focus-ring-color here but it doesn't work on box-shadow */
+	box-shadow: 0 0 1px 3px white;
+	box-shadow: 0 0 0 3px -moz-mac-focusring;
+	color: white;
+	outline: none;
+}
+
+/* Set options to normal weight */
+.select-css option {
+	font-weight: normal;
+}
+
+/* Support for rtl text, explicit support for Arabic and Hebrew */
+*[dir="rtl"] .select-css, :root:lang(ar) .select-css, :root:lang(iw) .select-css {
+	background-position: left .7em top 50%, 0 0;
+	padding: .6em .8em .5em 1.4em;
+}
+
+/* Disabled styles */
+.select-css:disabled, .select-css[aria-disabled=true] {
+	color: white;
+	background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22black%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+	  linear-gradient(to bottom,black 0%,black 100%);
+}
+
+.select-css:disabled:hover, .select-css[aria-disabled=true] {
+	border-color: #aaa;
+}
+
+
+/* -------------------------------
+------- MOOD BUTTONS CSS ---------
+------------------------------- */
+.mood-buttons-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 2rem;
+
+  justify-items: center;
+  align-content: center;
+
+  width: 100%;
+}
+
+.mood-button-div {
+  width: 100%;
+}
+
+.mood-btn {
+  width: 100%;
+  height: 6rem;
+
+  font-size: 2rem;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+
+  background-color: black;
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.5);
+
+  border: none;
+  border-radius: 1rem;
+
+  transition: 0.3s;
+}
+
+.mood-btn:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 700px) {
+  .mood-buttons-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .mood-buttons-container {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 375px) {
+  .mood-buttons-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.size-30 {
+  font-size: 3rem;
+  font-weight: 500;
+  line-height: 4rem;
+}
+
+.accent {
+  font-family: var(--acc-font);
+  font-weight: bolder;
+  font-size: 3rem;
+}
+
+.vert-divider {
+  position: relative;
+  width: 100%;
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.size-20 {
+  font-family: var(--acc-font);
+  font-weight: bolder;
+  font-size: 2rem;
+  line-height: 3rem;
+}
+
+.vert-hr {
+  width: 100%;
+  stroke-width: 2px;
+}
+
+#mood-track-container {
+  position: relative;
+  width: calc(100% - 2rem);
+  padding: 1rem;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  background-color: rgba(63, 31, 112, 0.85);
+  border-radius: 1rem;
+}
+
+.track-container {
+  position: relative;
+  width: 100%;
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  background-color: rgba(63, 31, 112, 0.85);
+  border-radius: 1rem;
+}
+
+.album-container {
+  margin-right: 2rem;
+}
+
+.album-container img {
+  border-radius: 1rem;
+}
+
+.track-info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.track-name, .track-artist, .track-album-name {
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 3rem;
+}
+
+.btn-container {
+  width: 100%;
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.a-half {
+  width: 48%;
+  height: 4rem;
+
+  background-color: var(--theme-color);
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 1rem;
+
+  font-size: 1.5rem;
+  text-align: center;
+  text-decoration: none;
+  padding-top: .75rem;
+
+  transition: 0.4s;
+}
+
+.a-full {
+  width: 85%;
+  height: 4rem;
+
+  margin: 0 auto 2rem;
+
+  background-color: var(--theme-color);
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 1rem;
+
+  font-size: 1.5rem;
+  text-align: center;
+  text-decoration: none;
+  padding-top: .75rem;
+
+  transition: 0.4s;
+}
+
+.btn-half {
+  width: 48%;
+  height: 4rem;
+
+  background-color: var(--theme-color);
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 1rem;
+
+  font-size: 1.5rem;
+  font-family: var(--reg-font);
+  text-align: center;
+
+  transition: 0.4s;
+}
+
+.a-half:hover,
+.btn-half:hover,
+.a-full:hover {
+  transform: scale(1.05);
+}
+
+.recent-tracks-container {
+  width: 100%;
+  padding: 1rem 1rem 10rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recent-tracks-container .track-container {
+  margin-bottom: 0;
+}
+
+.footer {
+  position: absolute;
+  height: 5rem;
+  bottom: 0;
+
+  margin: 3rem 0 0;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--theme-color);
+}
+
+a img {
+  margin-left: 1rem;
+  transition: 0.4s;
+}
+
+a img:hover {
+  box-shadow: 0 0 .5rem black;
+
+}
+
+.disabled {
+  background-color: gray;
+}
+
+#greeting-container {
+  display: none;
+  transition: .2s;
+}
+
+.github-logo {
+  max-width: 3rem;
+  max-height: 3rem;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1s linear 0s 1;
+}
+
+/* --------------------------------------------
+------------- MEDIA QUERIES -------------------
+------------------------------------------------ */
+
+@media (min-width: 200px) {
+  .title {
+    font-size: 4rem;
+  }
+
+  .greeting {
+    font-size: 3rem;
+  }
+
+  .size-30 {
+    font-size: 2.5rem;
+  }
+
+  .btn-container,
+  .track-container,
+  #mood-track-container {
+    flex-direction: column;
+  }
+
+  .track-info-container {
+    margin-top: .5rem;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .a-half, .btn-half {
+    width: 100%;
+    margin: .5rem 0;
+  }
+
+  .album-container {
+    margin: 0;
+  }
+
+  .text-small {
+    font-size: 1.3rem;
+  }
+}
+
+@media (min-width: 400px) {
+  .title {
+    font-size: 4rem;
+  }
+
+  .greeting {
+    font-size: 4rem;
+  }
+
+  .size-30 {
+    font-size: 3rem;
+  }
+
+  .btn-container,
+  .track-container,
+  #mood-track-container {
+    flex-direction: row;
+  }
+
+  .track-info-container {
+    margin-top: 0;
+    width: 100%;
+  }
+
+  .a-half, .btn-half {
+    width: 48%;
+    margin: 0;
+  }
+
+  .album-container {
+    margin-right: 1rem;
+  }
+}
+
+@media (min-width: 600px) {
+  img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .header {
+    align-items: flex-start;
+  }
+
+  .header .text {
+    margin-left: 2rem;
+  }
+
+  .content-container {
+    width: 75%;
+    margin: 0 auto;
+  }
+
+  .footer {
+    justify-content: flex-start;
+  }
+
+  .footer p {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .content-container {
+    width: 50%;
+  }
+}

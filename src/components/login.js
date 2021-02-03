@@ -12,14 +12,13 @@ const scopes = [
 
 // Redirects request to Spotify's authorization endpoint
 // On user login in, redirects back to /callback endpoint
-function Login(req, res) {
+export default function Login(req, res) {
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
       client_id: client,
       scope: scopes.join(' '),
       redirect_uri: redirectURI
-    }));
+    })
+  );
 }
-
-export default Login;
