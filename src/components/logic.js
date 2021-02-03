@@ -74,17 +74,10 @@ async function getSimilarTrack(token, features, tracks) {
     },
     params: {
       limit: 1,
+      market: 'from_token',
       min_energy: (parseFloat(features.energy) - 0.1).toFixed(2),
-      //target_energy: features.energy,
       max_energy: (parseFloat(features.energy) + 0.1).toFixed(2),
-      min_loudness: (parseFloat(features.loudness) - 1).toFixed(2),
-      //target_loudness: features.loudness,
-      max_loudness: (parseFloat(features.loudness) + 1).toFixed(2),
-      min_tempo: (parseFloat(features.tempo) - 10).toFixed(0),
-      //target_tempo: features.tempo,
-      max_tempo: (parseFloat(features.tempo) + 10).toFixed(0),
       min_valence: (parseFloat(features.valence) - 0.1).toFixed(2),
-      //target_valence: features.valence,
       max_valence: (parseFloat(features.valence) + 0.1).toFixed(2),
       min_speechiness: (parseFloat(features.speechiness) - 0.1).toFixed(2),
       max_speechiness: (parseFloat(features.speechiness) + 0.1).toFixed(2),
@@ -103,16 +96,8 @@ async function getMoodTrack(token) {
   const recentTracks = await getRecentTracks(token);
   const trackFeatures = await getFeatures(token, recentTracks);
 
-  const loudness = (trackFeatures.reduce( (prev, cur) => {
-    return prev + cur.loudness;
-  }, 0) / trackFeatures.length).toFixed(4);
-
   const energy = (trackFeatures.reduce( (prev, cur) => {
     return prev + cur.energy;
-  }, 0) / trackFeatures.length).toFixed(4);
-
-  const tempo = (trackFeatures.reduce( (prev, cur) => {
-    return prev + cur.tempo;
   }, 0) / trackFeatures.length).toFixed(4);
 
   const valence = (trackFeatures.reduce( (prev, cur) => {
@@ -124,9 +109,7 @@ async function getMoodTrack(token) {
   }, 0) / trackFeatures.length).toFixed(4);
 
   const averageFeatures = {
-    loudness,
     energy,
-    tempo,
     valence,
     speechiness
   };

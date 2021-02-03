@@ -47,7 +47,7 @@ function analyzeMood(features) {
       // Content
       return {
         mood: 'Feeling real good',
-        mood_desc: 'Keep that seratonin coming'
+        mood_desc: 'Keep that serotonin coming'
       }
     }
   }
@@ -59,7 +59,7 @@ function analyzeMood(features) {
       }
     } else if (energy >= 0.66) {
       return {
-        mood: 'Anxious',
+        mood: 'A little anxious',
         mood_desc: 'Ride out that anxiety'
       }
     } else {

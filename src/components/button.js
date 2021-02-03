@@ -56,6 +56,7 @@ export async function getPredefinedMoodTracks(token, mood, genre) {
     },
     params: {
       limit: 5,
+      market: 'US',
       min_valence: minValence,
       max_valence: maxValence,
       min_energy: minEnergy,
@@ -67,4 +68,52 @@ export async function getPredefinedMoodTracks(token, mood, genre) {
   .then( response => {
     return response.data;
   });
+}
+
+export function getMoodDescription(mood) {
+  let moodTitle, moodText;
+
+  switch (mood) {
+    case 'mad':
+      moodTitle = 'Mad at the world';
+      moodText = 'Help you stay mad'
+      break;
+    case 'anxious':
+      moodTitle = 'A little anxious';
+      moodText = 'Ride out that anxiety'
+      break;
+    case 'pumped':
+      moodTitle = 'Pumped up';
+      moodText = 'Keep that pump going'
+      break;
+    case 'blue':
+      moodTitle = 'Feeling a bit blue';
+      moodText = 'Feel the blues a bit more'
+      break;
+    case 'content':
+      moodTitle = 'Nice and content';
+      moodText = 'Feel more in tune with the moment'
+      break;
+    case 'good':
+      moodTitle = 'Feelin\' real good';
+      moodText = 'Keep that serotonin coming'
+      break;
+    case 'feels':
+      moodTitle = 'In the feels';
+      moodText = 'Ride out those feelings'
+      break;
+    case 'bored':
+      moodTitle = 'Bored';
+      moodText = 'Help you stare at the wall'
+      break;
+    case 'vibe':
+      moodTitle = 'Just vibin\'';
+      moodText = 'Keep those good vibes going'
+      break;
+    default:
+      moodTitle = 'Just feeling';
+      moodText = 'Help feel some more';
+  }
+
+  return {moodTitle, moodText};
 }

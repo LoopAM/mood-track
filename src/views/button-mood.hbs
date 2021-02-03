@@ -1,7 +1,7 @@
 <div id="button-mood-page">
 
   <div class="header container">
-    <a href="'" class="logo-link">
+    <a href="/" class="logo-link">
       <h1 class="title text">Mood Track</h1>
     </a>
   </div>
@@ -9,7 +9,7 @@
   <div class="content-container">
 
     <div class="fade-in text-container">
-      <p class="size-30 text">Seems like you're <span class="accent">{{mood}}.</span> Here's a track to <span class="accent">{{mood_desc}}</span>.</p>
+      <p class="size-30 text">Seems like you're <span class="accent">{{mood_title}}.</span> Here's a track to <span class="accent">{{mood_text}}</span> with a <span class="accent">{{genre}}</span> twist.</p>
     </div>
 
     <div class="fade-in vert-divider">
@@ -17,6 +17,59 @@
       <hr class="vert-hr" />
     </div>
 
+    <div class="recent-tracks-container fade-in">
+
+      {{#each tracks}}
+        <div class="fade-in track-container">
+          <div class="album-container">
+            <img
+              src="{{this.album.images.1.url}}"
+              alt="Album cover"
+              class="album"
+              width="100px"
+              height="100px"
+              loading="lazy">
+          </div>
+          <div class="track-info-container">
+            <p class="track-name text">{{this.name}}</p>
+            <p class="track-artist text">{{this.artists.0.name}}</p>
+            <p class="track-album-name text">{{this.album.name}}</p>
+          </div>
+        </div>
+
+        <div class="fade-in btn-container">
+          {{#if this.preview_url}}
+            <a
+              id="preview-song-link"
+              href="{{this.preview_url}}"
+              class="a-half text"
+              target="_blank"
+              rel="noreferrer"
+            >Preview in new tab
+            </a>
+          {{else}}
+            <a class="disabled a-half text">No preview</a>
+          {{/if}}
+        </div>
+      {{/each}}
+    </div>
+
+  </div>
+
+  <div class="footer container">
+    <p class="text-small">Made with love by AML</p>
+    <a
+      href="https://github.com/LoopAM/mood-track"
+      target="_blank"
+      rel="noreferrer"
+      >
+      <img
+        src="./assets/GitHub-Mark-64px.png"
+        alt="The Github Logo"
+        width="30px"
+        height="30px"
+        class="github-logo">
+    </a>
   </div>
 
 </div>

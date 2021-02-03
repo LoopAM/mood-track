@@ -16,7 +16,7 @@ import Login from './components/login.js';
 import { getUser, getMoodTrack } from './components/logic.js';
 import { getSearchToken } from './components/token.js';
 import { getMoodTrackFromSearch } from './submit.js';
-import { getPredefinedMoodTracks } from './components/button.js';
+import { getPredefinedMoodTracks, getMoodDescription } from './components/button.js';
 
 // Hack to make __dirname work with ES Modules
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -148,14 +148,16 @@ if (cluster.isMaster) {
     const genre = req.body.genre;
     const searchToken = req.searchToken;
 
+    const {moodTitle, moodText} = getMoodDescription(mood);
     const songs = await getPredefinedMoodTracks(searchToken, mood, genre);
 
-    // res.render('button-mood', {
-    //   layout: 'index',
-    //   mood: mood,
-    //   genre: genre,
-    //   tracks: songs.tracks,
-    // });
+    res.render('button-mood', {
+      layout: 'index',
+      mood_title: moodTitle,
+      mood_text: moodText,
+      genre: genre,
+      tracks: songs.tracks,
+    });
   });
 
   // Middleware for /search and /submit endpoints to verify
