@@ -2,7 +2,6 @@ import 'dotenv/config.js';
 import express from 'express';
 import cors from 'cors';
 import { dirname } from 'path';
-import bodyParser from 'body-parser';
 import querystring from 'querystring';
 import axios from 'axios';
 import { fileURLToPath } from 'url';
@@ -15,7 +14,6 @@ import cookieParser from 'cookie-parser';
 import Login from './components/login.js';
 import { getUser, getMoodTrack } from './components/logic.js';
 import { getSearchToken } from './components/token.js';
-import { getMoodTrackFromSearch } from './submit.js';
 import { getPredefinedMoodTracks, getMoodDescription } from './components/button.js';
 
 // Hack to make __dirname work with ES Modules
@@ -44,8 +42,8 @@ if (cluster.isMaster) {
   // Set up middleware
   const app = express();
   app.use(cors());
-  app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(bodyParser.json());
+  app.use(express.urlencoded({ extended: true }));
+  app.use(express.json());
   app.use(cookieParser());
   app.use(compression());
   app.use(express.static(__dirname + '/public'));
@@ -142,6 +140,7 @@ if (cluster.isMaster) {
     });
   });
 
+  // End point for when the user selects one of the mood buttons
   app.use('/mood', getSearchToken);
   app.post('/mood', async (req, res) => {
     const mood = req.body.mood;
@@ -160,71 +159,7 @@ if (cluster.isMaster) {
     });
   });
 
-  // Middleware for /search and /submit endpoints to verify
-  // search token and fetch a new one if necessary
-  app.use('/search', getSearchToken)
-
-
-  // Fetch songs from Spotify search api
-  app.post('/search', async (req, res) => {
-    const songTitle = req.body.songTitle;
-
-    await axios({
-      method: 'get',
-      url: 'https://api.spotify.com/v1/search',
-      headers: {
-        Authorization: `Bearer ${req.searchToken}`
-      },
-      params: {
-        q: songTitle,
-        type: 'track',
-        limit: 3,
-      }
-    })
-    .catch( error => {
-      console.log(error);
-      res.sendStatus(404);
-    })
-    .then( response => {
-      res.json(response.data.tracks.items);
-    })
-  });
-
-  app.use('/submit', getSearchToken)
-
-  // Get mood track similar to the login api endpoint
-  // Uses search tracks as seeds for mood track
-  app.post('/submit', async (req, res) => {
-    const id1 = req.body.song_id_1;
-    const id2 = req.body.song_id_2;
-    const id3 = req.body.song_id_3;
-    const songIds = [id1, id2, id3];
-    const searchToken = req.searchToken;
-
-    Promise.all([
-      getMoodTrackFromSearch(searchToken, songIds)
-    ])
-    .catch( error => console.log(error) )
-    .then( result => {
-      const searchTracks = result[0].searchTracks;
-      const moodTrack = result[0].moodTrack;
-      const moodAnalysis = result[0].moodAnalysis;
-
-      res.redirect('/');
-
-      // .render('mood', {
-      //   layout: 'index',
-      //   mood: moodAnalysis.mood,
-      //   mood_desc: moodAnalysis.mood_desc,
-      //   mood_track: moodTrack.tracks[0],
-      //   search_tracks: searchTracks
-      // });
-    });
-  });
-
   app.listen(port, () => {
     console.log(`Mood Track running. Listening on port ${port}`);
   });
 }
-
-

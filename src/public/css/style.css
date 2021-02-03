@@ -70,6 +70,11 @@ body {
 
 .logo-link {
   text-decoration: none;
+  transition: 0.4s;
+}
+
+.logo-link:hover {
+  text-shadow: 4px 4px black;
 }
 
 #home-page,
@@ -81,7 +86,7 @@ body {
 
 .content-container {
   width: 100%;
-  padding-bottom: 7rem;
+  padding: 0 0 7rem;
 }
 
 .text {
@@ -92,7 +97,7 @@ body {
 }
 
 .text-small {
-  color: white;
+  color: #ffffff;
   font-size: 1.5rem;
   line-height: 2.5rem;
 
@@ -369,6 +374,21 @@ hr {
   stroke-width: 2px;
 }
 
+#mood-track-container {
+  position: relative;
+  width: calc(100% - 2rem);
+  padding: 1rem;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  background-color: rgba(63, 31, 112, 0.85);
+  border-radius: 1rem;
+}
+
 .track-container {
   position: relative;
   width: 100%;
@@ -379,7 +399,7 @@ hr {
   justify-content: flex-start;
   align-items: center;
 
-  background-color: var(--theme-color);
+  background-color: rgba(63, 31, 112, 0.85);
   border-radius: 1rem;
 }
 
@@ -432,8 +452,10 @@ hr {
 }
 
 .a-full {
-  width: 100%;
+  width: 85%;
   height: 4rem;
+
+  margin: 0 auto 2rem;
 
   background-color: var(--theme-color);
   box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.25);
@@ -458,7 +480,7 @@ hr {
   border-radius: 1rem;
 
   font-size: 1.5rem;
-  font-weight: bold;
+  font-family: var(--reg-font);
   text-align: center;
 
   transition: 0.4s;
@@ -481,7 +503,7 @@ hr {
 }
 
 .recent-tracks-container .track-container {
-  margin-bottom: 2rem;
+  margin-bottom: 0;
 }
 
 .footer {
@@ -501,6 +523,12 @@ hr {
 
 a img {
   margin-left: 1rem;
+  transition: 0.4s;
+}
+
+a img:hover {
+  box-shadow: 0 0 .5rem black;
+
 }
 
 .disabled {
@@ -534,11 +562,7 @@ a img {
 ------------- MEDIA QUERIES -------------------
 ------------------------------------------------ */
 
-@media (min-width: 250px) {
-  .submit {
-    font-size: 1.75rem;
-  }
-
+@media (min-width: 200px) {
   .title {
     font-size: 4rem;
   }
@@ -551,7 +575,9 @@ a img {
     font-size: 2.5rem;
   }
 
-  .btn-container, .track-container {
+  .btn-container,
+  .track-container,
+  #mood-track-container {
     flex-direction: column;
   }
 
@@ -570,13 +596,13 @@ a img {
   .album-container {
     margin: 0;
   }
+
+  .text-small {
+    font-size: 1.3rem;
+  }
 }
 
 @media (min-width: 400px) {
-  .submit {
-    font-size: 2rem;
-  }
-
   .title {
     font-size: 4rem;
   }
@@ -589,7 +615,9 @@ a img {
     font-size: 3rem;
   }
 
-  .btn-container, .track-container {
+  .btn-container,
+  .track-container,
+  #mood-track-container {
     flex-direction: row;
   }
 
@@ -601,10 +629,6 @@ a img {
   .a-half, .btn-half {
     width: 48%;
     margin: 0;
-  }
-
-  .track-container {
-    flex-direction: row;
   }
 
   .album-container {

@@ -6,19 +6,19 @@ export async function getPredefinedMoodTracks(token, mood, genre) {
 
   switch (mood) {
     case 'mad':
-      minValence = 0.00; maxValence = 0.34;
-      minEnergy = 0.66; maxEnergy = 1.00;
+      minValence = 0; maxValence = 0.34;
+      minEnergy = 0.66; maxEnergy = 1;
       break;
     case 'anxious':
       minValence = 0.34; maxValence = 0.66;
-      minEnergy = 0.66; maxEnergy = 1.00;
+      minEnergy = 0.66; maxEnergy = 1;
       break;
     case 'pumped':
-      minValence = 0.66; maxValence = 1.00;
-      minEnergy = 0.66; maxEnergy = 1.00;
+      minValence = 0.66; maxValence = 1;
+      minEnergy = 0.66; maxEnergy = 1;
       break;
     case 'blue':
-      minValence = 0.00; maxValence = 0.34;
+      minValence = 0; maxValence = 0.34;
       minEnergy = 0.34; maxEnergy = 0.66;
       break;
     case 'content':
@@ -26,24 +26,24 @@ export async function getPredefinedMoodTracks(token, mood, genre) {
       minEnergy = 0.34; maxEnergy = 0.66;
       break;
     case 'good':
-      minValence = 0.66; maxValence = 1.00;
+      minValence = 0.66; maxValence = 1;
       minEnergy = 0.34; maxEnergy = 0.66;
       break;
     case 'feels':
-      minValence = 0.00; maxValence = 0.34;
-      minEnergy = 0.00; maxEnergy = 0.34;
+      minValence = 0; maxValence = 0.34;
+      minEnergy = 0; maxEnergy = 0.34;
       break;
     case 'bored':
       minValence = 0.34; maxValence = 0.66;
-      minEnergy = 0.00; maxEnergy = 0.34;
+      minEnergy = 0; maxEnergy = 0.34;
       break;
     case 'vibe':
-      minValence = 0.66; maxValence = 1.00;
-      minEnergy = 0.00; maxEnergy = 0.34;
+      minValence = 0.66; maxValence = 1;
+      minEnergy = 0; maxEnergy = 0.34;
       break;
     default:
-      minValence = 0.5; maxValence = 0.5;
-      minEnergy = 0.5; maxEnergy = 0.5;
+      minValence = 0.4; maxValence = 0.6;
+      minEnergy = 0.4; maxEnergy = 0.6;
   }
 
   return await axios({
