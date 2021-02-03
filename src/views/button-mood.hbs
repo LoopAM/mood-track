@@ -18,7 +18,7 @@
     </div>
 
     <div class="recent-tracks-container fade-in">
-
+      {{#if tracks}}
       {{#each tracks}}
         <div class="fade-in track-container">
           <div class="album-container">
@@ -52,6 +52,9 @@
           {{/if}}
         </div>
       {{/each}}
+      {{else}}
+        <p class="text">Looks like nothing was found.</p>
+      {{/if}}
     </div>
 
   </div>

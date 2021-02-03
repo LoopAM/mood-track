@@ -145,6 +145,12 @@ if (cluster.isMaster) {
   app.post('/mood', async (req, res) => {
     const mood = req.body.mood;
     const genre = req.body.genre;
+
+    // Formats genre text for use on page
+    let genreFormatted = genre.split('-')
+    .map( word => word[0].toUpperCase() + word.slice(1)).join(' ');
+    if (genre === 'r-n-b') genreFormatted = 'R&B';
+
     const searchToken = req.searchToken;
 
     const {moodTitle, moodText} = getMoodDescription(mood);
@@ -154,7 +160,7 @@ if (cluster.isMaster) {
       layout: 'index',
       mood_title: moodTitle,
       mood_text: moodText,
-      genre: genre,
+      genre: genreFormatted,
       tracks: songs.tracks,
     });
   });
